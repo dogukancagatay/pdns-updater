@@ -1,0 +1,40 @@
+version: "3"
+services:
+
+  app:
+    build: ./
+    image: dcagatay/dynamic-pdns-updater
+    environment:
+      HOST_IP: "10.35.23.90"
+      PDNS_API_URL: "http://pdns:8081/api/v1"
+      PDNS_API_KEY: "changeme"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
+  pdns:
+    image: dcagatay/pdns-sqlite:latest
+    volumes:
+      - ./data/pdns:/data
+    ports:
+      - 127.0.0.10:53:53/udp
+      - 8081:8081
+    environment:
+      API_KEY: "changeme"
+      DEFAULT_SOA_NAME: "ns1.yourdomain.com"
+    restart: unless-stopped
+
+  whoami1:
+    image: containous/whoami
+    ports:
+      - 8181:80
+    labels:
+      - "svc.dns.domain=yourdomain.com"
+      - "svc.dns.name=whoami1.yourdomain.com"
+
+  whoami2:
+    image: containous/whoami
+    ports:
+      - 8182:80
+    labels:
+      - "svc.dns.name=whoami2.yourdomain.com"
