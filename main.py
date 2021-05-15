@@ -34,6 +34,7 @@ async def periodic(providers: Sequence[DynamicDnsProviderInterface], delay=60.0)
 if __name__ == "__main__":
 
     HOST_IP = os.getenv("HOST_IP", None)
+    UPDATE_PERIOD_SECONDS = int(os.getenv("UPDATE_PERIOD_SECONDS", "30"))
 
     if HOST_IP is None:
         logger.error("Cannot start without HOST_IP environment variable")
@@ -42,7 +43,7 @@ if __name__ == "__main__":
     loop = asyncio.get_event_loop()
     task = loop.create_task(periodic(providers=[
         DockerDnsProvider(host_ips=[HOST_IP])
-    ], delay=3))
+    ], delay=UPDATE_PERIOD_SECONDS))
 
     try:
         loop.run_until_complete(task)
