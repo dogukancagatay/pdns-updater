@@ -3,7 +3,7 @@ services:
 
   app:
     build: ./
-    image: dcagatay/dynamic-pdns-updater
+    image: dcagatay/pdns-updater:latest
     depends_on:
       - pdns
       - whoami1
