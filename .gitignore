@@ -2,4 +2,4 @@ backups
 .direnv
 __pycache__
 .vscode
-
+data
