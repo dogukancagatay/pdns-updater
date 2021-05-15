@@ -4,6 +4,10 @@ services:
   app:
     build: ./
     image: dcagatay/dynamic-pdns-updater
+    depends_on:
+      - pdns
+      - whoami1
+      - whoami2
     environment:
       HOST_IP: "10.35.23.90"
       PDNS_API_URL: "http://pdns:8081/api/v1"
@@ -38,3 +42,11 @@ services:
       - 8182:80
     labels:
       - "svc.dns.name=whoami2.yourdomain.com"
+
+  whoami3:
+    image: containous/whoami
+    ports:
+      - 8181:80
+    labels:
+      - "svc.dns.domain=yourdomain.com"
+      - "svc.dns.name=*.whoami3.yourdomain.com,whoami3.yourdomain.com"
