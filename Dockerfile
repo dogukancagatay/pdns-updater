@@ -3,6 +3,7 @@ LABEL maintainer="Doğukan Çağatay <dcagatay@gmail.com>"
 
 ENV PDNS_API_URL "http://pdns:8081/api/v1"
 ENV PDNS_API_KEY "changeme"
+ENV UPDATE_PERIOD_SECONDS "30"
 
 WORKDIR /app
 COPY ./requirements.txt /app/
