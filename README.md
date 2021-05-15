@@ -13,9 +13,13 @@ PowerDNS requires zone creation for domain records, pdns-updater handles zone cr
 
 Different usage examples can found at `docker-compose.yml`.
 
+## Docker Image
+
+Docker images for several platforms (armv7, arm64, amd64) are available at Docker Hub([dcagatay/pdns-updater](https://hub.docker.com/r/dcagatay/pdns-updater)).
+
 ## Environment Variables
 
-- `HOST_IP`: IP address of the host that the docker daemon is running. Services will be declared to DNS server with IP address. *Required to be set*
+- `HOST_IP`: IP address of the host that the docker daemon is running. Services will be declared to DNS server with IP address. *No defaults, required to be set*
 - `PDNS_API_URL`: PowerDNS server REST API URL. You need to enable webserver feature on PowerDNS server. Default: *http://pdns:8081/api/v1*
 - `PDNS_API_KEY`: PowerDNS REST API KEY. Default: *changeme*
 - `UPDATE_PERIOD_SECONDS`: DNS record update period. Docker will be checked and DNS records will be updated every period seconds. Default: *30*
